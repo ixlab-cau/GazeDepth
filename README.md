@@ -73,11 +73,11 @@ python3 Merge_Predicted_Plate_Labels.py \
 
 ## Outdoor Annotation and Blurring
 
-### 1. 'ObjectDetection_GroundedDINO.py'
+### 1. `ObjectDetection_GroundedDINO.py`
 Runs GroundingDINO on each scene video and saves frame-level object detections (boxes + phrases + scores) into JSONL files. optionally also saves an annotated video for visual checking.
 
 ### Usage
-'''bash
+```bash
 python3 ObjectDetection_GroundedDINO.py \
     --root-dir /home/Variable-distance_viewing/Variable-distance_outdoor/Timeseries_Data_and_Scene_Video \
     --output-dir /home/Outdoor_DINO \
@@ -89,26 +89,26 @@ python3 ObjectDetection_GroundedDINO.py \
     --device cuda:0 \
     --every-n 1 \
     --save-annotated-video
-''''
+```
 
-### 2. 'Phone_Blur.py'
+### 2. `Phone_Blur.py`
 Applies mosaic/pixelation to detected objects (e.g., cell phone, face) by reading the DINO JSONL detections and blurring matching boxes in the corresponding video frames. 
 
 ### Usage
-'''bash
+```bash
 python3 Phone_Blur.py \
     --video-root /home/Variable-distance_viewing/Variable-distance_outdoor/Variable-distance_outdoor_Task_Face_Mapper \
     --jsonl-root /home/od_jsonl \
     --out-root /home/mosaic_videos \
     --target-keywords "cell phone" face \
     --pixel-size 18
-'''
+```
 
-### 3. 'Licenseplate_Blur.py'
+### 3. `Licenseplate_Blur.py`
 Applies mosaic blur to vehicle license plates in videos using DINO JSONL detections, with an option to blur plates only when they lie inside a detected car box (to reduce false positives). 
 
 ### Usage
-'''bash
+```bash
 python3 Licenseplate_Blur.py \
     --video-root /home/original_videos \
     --jsonl-root /home/od_jsonl \
@@ -117,17 +117,17 @@ python3 Licenseplate_Blur.py \
     --plate-margin 4 \
     --extra-frames-plate 5 \
     --only-plate-inside-car
-'''
+```
 
-### 4. 'Variable-Distance_Outdoor_GazeObjectMatch.py'
+### 4. `Variable-Distance_Outdoor_GazeObjectMatch.py`
 Assigns an object label to each gaze point by (1) aligning gaze timestamps to frame timestamps and (2) selecting the closest detection box within a radius from the DINO JSONL detections, outputs a labeled CSV per video.
 
 ### Usage
-'''bash
+```bash
 python3 Variable-Distance_Outdoor_GazeObjectMatch.py \
     --jsonl-root /home/od_jsonl \
     --gaze-root /home/Variable-distance_viewing/Variable-distance_outdoor/Timeseries_Data_and_Scene_Video \
     --out-root /home/gaze_object_labels_all \
     --radius-px 10 \
     --max-dt-ms 25
-'''
+```
